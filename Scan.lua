@@ -18,7 +18,6 @@ scan:RegisterEvent'ADDON_ACTION_FORBIDDEN'
 
 
 function scan.LOAD()
-	print('load')
     UIParent:UnregisterEvent'ADDON_ACTION_FORBIDDEN'
     do
 		local flash = CreateFrame'Frame'
@@ -90,8 +89,8 @@ end
 function scan.tip(name)
     scan.flash.animation:Play()
 	scan.play_sound()
-	local name = UnitName("player")
-	SendChatMessage('<scan> ' .. name, "WHISPER", nil, name)
+	local myName = UnitName("player")
+	SendChatMessage('<scan> ' .. name, "WHISPER", nil, myName)
 end
 function scan.target(name)
     isFind = false
@@ -132,7 +131,7 @@ end
 SLASH_My1 = '/scan'
 function SlashCmdList.My(parameter)
     if parameter == 'test' then
-		scan.tip('啊啊啊')
+		scan.tip('测试用例')
         -- scan.flash.animation:Play()
     elseif parameter == 'clear' then
         for key in pairs(scan_targets) do
