@@ -93,19 +93,17 @@ function scan.tip(name)
 	SendChatMessage('<scan> ' .. name, "WHISPER", nil, myName)
 end
 function scan.target(name)
-    isFind = false
-	local sound_setting = GetCVar'Sound_EnableAllSound'
-    SetCVar('Sound_EnableAllSound', 0)
-	TargetUnit(name, true)
-	SetCVar('Sound_EnableAllSound', sound_setting)
-    if isFind then
-        if not found[name] then
-            found[name] = true
-            scan.tip(name)
-        end
-    else
-		found[name] = false
-    end
+	if not found[name] then
+		isFind = false
+		local sound_setting = GetCVar'Sound_EnableAllSound'
+		SetCVar('Sound_EnableAllSound', 0)
+		TargetUnit(name, true)
+		SetCVar('Sound_EnableAllSound', sound_setting)
+		if isFind then
+			found[name] = true
+			scan.tip(name)
+		end
+	end
 end
 
 function scan.toggle_target(name)
