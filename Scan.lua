@@ -93,14 +93,14 @@ function scan.tip(name)
 	SendChatMessage('<scan> ' .. name, "WHISPER", nil, myName)
 end
 function scan.target(name)
-	if not found[name] then
+	if not found[name] or GetTime() - found[name] > 30 then
 		isFind = false
 		local sound_setting = GetCVar'Sound_EnableAllSound'
 		SetCVar('Sound_EnableAllSound', 0)
 		TargetUnit(name, true)
 		SetCVar('Sound_EnableAllSound', sound_setting)
 		if isFind then
-			found[name] = true
+			found[name] = GetTime()
 			scan.tip(name)
 		end
 	end
